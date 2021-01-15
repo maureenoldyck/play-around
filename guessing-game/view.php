@@ -15,6 +15,7 @@
 			Guess: <input type="number" name="guess"><br>
 			<input name="submit" type="submit">
 		</form>
+		<p> <?=$alert;?> </p>
 	</div>
 </body>
 </html>
