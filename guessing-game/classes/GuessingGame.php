@@ -69,10 +69,12 @@ class GuessingGame
             unset($_SESSION['guessesToGo']);
             unset($_SESSION['secretNumber']);
         //     echo $this->alert;
-        } else {
+        } else if ($_POST['guess'] > $this->secretNumber){
             // return $this->alert = 'Your guess was incorect, please try again!!';
             // echo $this->alert;
-            echo "Your guess was incorrect, please try again!! You have {$_SESSION['guessesToGo']} guesses left!";
+            echo "Your guess was too high, please try again!! You have {$_SESSION['guessesToGo']} guesses left!";
+        } else {
+            echo "Your guess was too low, please try again!! You have {$_SESSION['guessesToGo']} guesses left!";
         }
         // Don't use an echo here (that one goes in the view), use a return
     }
