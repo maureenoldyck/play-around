@@ -1,7 +1,8 @@
 <?php
 
-//TODO: User can only make 3 guesses
 //TODO: Higher or lower than given number 
+//TODO: try functions without echo's
+//TODO: Add alert when given number is not valid
 
 
 class GuessingGame
