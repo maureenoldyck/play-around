@@ -1,10 +1,14 @@
 <?php
 
+//TODO: User can only make 3 guesses
+//TODO: Higher or lower than given number 
+
 
 class GuessingGame
 {
     public $maxGuesses;
     public $secretNumber;
+    public $guessesToGo;
 
     // TODO: set a default amount of max guesses
     public function __construct(int $maxGuesses)
@@ -12,6 +16,9 @@ class GuessingGame
         // We ask for the max guesses when someone creates a game
         // Allowing your settings to be chosen like this, will bring a lot of flexibility
         $this->maxGuesses = $maxGuesses;
+        if (!empty($_SESSION['guessesToGo'])) {
+            $this->guessesToGo = $_SESSION['guessesToGo'];
+        } 
         if (!empty($_SESSION['secretNumber'])) {
             $this->secretNumber = $_SESSION['secretNumber'];
         } 
@@ -26,13 +33,16 @@ class GuessingGame
             $this->secretNumber = rand(1,10);
             $_SESSION['secretNumber'] = $this->secretNumber;
         } 
+        if (empty($this->guessesToGo)) {
+            $this->guessesToGo = $this->maxGuesses;
+            $_SESSION['guessesToGo'] = $this->guessesToGo;
+        } 
         // --> if not, generate one and store it in the session (so it can be kept when the user submits the form)
         // TODO: check if the player has submitted a guess
         if (!empty($_POST['submit'])) {
             if ($_POST['guess'] == $this->secretNumber) {
                 $this->playerWins();
             } else {
-                $this->maxGuesses--;
                 $this->playerLoses();
             }
         }
@@ -46,19 +56,22 @@ class GuessingGame
         // Don't use an echo here (that one goes in the view), use a return
         // return $this->alert = 'You guessed correct, congratulations you deserve a star!';
         echo 'You guessed correct, congratulations you deserve a star!';
-        $_SESSION['secretNumber'] = "";
+        unset($_SESSION['secretNumber']);
     }
 
     public function playerLoses()
     {
+        $_SESSION['guessesToGo'] = $this->guessesToGo - 1;
         // TODO: show a lost message (mention the secret number)
-        if ($this->maxGuesses == 0) {
+        if ($_SESSION['guessesToGo'] == 0) {
             echo "Sadly you lose, the secret number was {$this->secretNumber}.";
+            unset($_SESSION['guessesToGo']);
+            unset($_SESSION['secretNumber']);
         //     echo $this->alert;
         } else {
             // return $this->alert = 'Your guess was incorect, please try again!!';
             // echo $this->alert;
-            echo "Your guess was incorrect, please try again!! You have {$this->maxGuesses} guesses left!";
+            echo "Your guess was incorrect, please try again!! You have {$_SESSION['guessesToGo']} guesses left!";
         }
         // Don't use an echo here (that one goes in the view), use a return
     }
