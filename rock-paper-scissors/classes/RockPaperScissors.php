@@ -6,14 +6,13 @@ class RockPaperScissors
     public $userChoice;
     public $choices = array('cat', 'mouse', 'elephant');
     public $alert;
+    public $playAgain;
 
     public function run()
     {
         // This function functions as your game "engine"
         // Now it's on to you to take the steering wheel and determine how it will work
 
-
-        // TODO: Let userchoice stay when pressing play button -> prob with session
         if (!empty($_POST['choice'])) {
             $this->userChoice = $_POST['choice'];
             $_SESSION['userChoice'] = $this->userChoice;
@@ -45,6 +44,8 @@ class RockPaperScissors
         } else {
             $this->alert = "Sadly, the computer wins!";
         }
+        
+        $this->playAgain = '<input type="submit" name="playAgain" value="Play Again">';
     }
 
 }
