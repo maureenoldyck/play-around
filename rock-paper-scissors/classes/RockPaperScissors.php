@@ -43,11 +43,11 @@ class RockPaperScissors
     private function winner() 
     {
         if ($_SESSION['computerChoice'] == $_SESSION['userChoice']) {
-            $this->alert = "It's a draw!";
+            $this->alert = '<span  style="color:#8BA4B3"> It\'s a draw! </span>';
         } else if ($_SESSION['computerChoice'] == "Cat" && $_SESSION['userChoice'] == "Elephant" || $_SESSION['computerChoice'] == "Elephant" && $_SESSION['userChoice'] == "Mouse" ||$_SESSION['computerChoice']  == "Mouse" && $_SESSION['userChoice'] == "Cat") {
-            $this->alert = "You win, congratulations! You deserve a star!";
+            $this->alert = '<span  style="color:#9CB2A5"> You win, congratulations! You deserve a star! </span>';
         } else {
-            $this->alert = "Sadly, the computer wins!";
+            $this->alert = '<span  style="color:#733236"> Sadly, the computer wins! </span>';
         }
         
         $this->playAgain = '<input type="submit" name="playAgain" value="Play Again" style="background-color:#303D38">';
