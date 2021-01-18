@@ -21,6 +21,7 @@ class RockPaperScissors
 
         if (!empty($_POST['play'])) {
             $this->computerChoice = ucfirst($this->choices[array_rand($this->choices)]);
+            $this->userChoice = $_SESSION['userChoice'];
             $_SESSION['computerChoice'] = $this->computerChoice; 
             $this->winner();
         }
@@ -37,8 +38,6 @@ class RockPaperScissors
             $this->alert = "It's a draw!";
         } else if ($_SESSION['computerChoice'] == "rock" && $_SESSION['userChoice'] == "paper" || $_SESSION['computerChoice'] == "paper" && $_SESSION['userChoice'] == "scissors" ||$_SESSION['computerChoice']  == "scissors" && $_SESSION['userChoice'] == "rock") {
             $this->alert = "You win, congratulations! You deserve a star!";
-        } else if ($_SESSION['userChoice'] == NULL) {
-            $this->alert = "Please choose a weapon!";
         } else {
             $this->alert = "Sadly, the computer wins!";
         }
