@@ -4,7 +4,7 @@ class RockPaperScissors
 {
     public $computerChoice;
     public $userChoice;
-    public $choices = array('rock', 'paper', 'scissors');
+    public $choices = array('cat', 'mouse', 'elephant');
     public $alert;
 
     public function run()
@@ -20,10 +20,14 @@ class RockPaperScissors
         }
 
         if (!empty($_POST['play'])) {
-            $this->computerChoice = ucfirst($this->choices[array_rand($this->choices)]);
-            $this->userChoice = $_SESSION['userChoice'];
-            $_SESSION['computerChoice'] = $this->computerChoice; 
-            $this->winner();
+            if (empty($_SESSION['userChoice'])) {
+                $this->alert = "Please, choose a weapon!";
+            } else {
+                $this->computerChoice = ucfirst($this->choices[array_rand($this->choices)]);
+                $this->userChoice = $_SESSION['userChoice'];
+                $_SESSION['computerChoice'] = $this->computerChoice; 
+                $this->winner();   
+            }
         }
 
         if (!empty($_POST['playAgain'])) {
@@ -36,7 +40,7 @@ class RockPaperScissors
     {
         if ($_SESSION['computerChoice'] == $_SESSION['userChoice']) {
             $this->alert = "It's a draw!";
-        } else if ($_SESSION['computerChoice'] == "rock" && $_SESSION['userChoice'] == "paper" || $_SESSION['computerChoice'] == "paper" && $_SESSION['userChoice'] == "scissors" ||$_SESSION['computerChoice']  == "scissors" && $_SESSION['userChoice'] == "rock") {
+        } else if ($_SESSION['computerChoice'] == "Cat" && $_SESSION['userChoice'] == "Elephant" || $_SESSION['computerChoice'] == "Elephant" && $_SESSION['userChoice'] == "Mouse" ||$_SESSION['computerChoice']  == "Mouse" && $_SESSION['userChoice'] == "Cat") {
             $this->alert = "You win, congratulations! You deserve a star!";
         } else {
             $this->alert = "Sadly, the computer wins!";
