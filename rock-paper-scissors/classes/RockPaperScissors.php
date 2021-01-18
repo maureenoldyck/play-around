@@ -16,6 +16,7 @@ class RockPaperScissors
         if (!empty($_POST['choice'])) {
             $this->userChoice = $_POST['choice'];
             $_SESSION['userChoice'] = $this->userChoice;
+            $this->chosenButton();
         }
 
         if (!empty($_POST['play'])) {
@@ -46,6 +47,12 @@ class RockPaperScissors
         }
         
         $this->playAgain = '<input type="submit" name="playAgain" value="Play Again">';
+    }
+
+
+    private function chosenButton()
+    {
+        
     }
 
 }

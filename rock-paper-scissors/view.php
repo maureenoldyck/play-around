@@ -14,11 +14,12 @@
     <div class="container">
         <h1>Cat🐱, Mouse🐭, Elephant🐘</h1>
         <form method="post">
-            <input type="submit" name="choice" value="Cat">
-            <input type="submit" name="choice" value="Mouse">
-            <input type="submit" name="choice" value="Elephant">
-            <br> 
-            <input type="submit" name="play" value="Play">
+        <?= $cat = '<input type="submit" name="choice" value="Cat">' ?>
+        <input type="submit" name="choice" value="Mouse">
+        <input type="submit" name="choice" value="Elephant">
+        <br> 
+        <br> 
+        <input type="submit" name="play" value="Play">
         </form>
         <p> User choice: <?= $game->userChoice; ?> </p>
         <p> Computer chose: <?= $game->computerChoice; ?> </p>
@@ -28,5 +29,17 @@
         </form>
     </div>
 </body>
+
+<style> 
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    text-align: center;
+    padding: 50px;
+}
+</style>
 
 </html>
