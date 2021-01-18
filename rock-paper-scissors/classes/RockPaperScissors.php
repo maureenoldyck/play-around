@@ -7,6 +7,10 @@ class RockPaperScissors
     public $choices = array('cat', 'mouse', 'elephant');
     public $alert;
     public $playAgain;
+    public $cat = '<input type="submit" name="choice" value="Cat">';
+    public $mouse = '<input type="submit" name="choice" value="Mouse">';
+    public $elephant = '<input type="submit" name="choice" value="Elephant">';
+
 
     public function run()
     {
@@ -46,13 +50,23 @@ class RockPaperScissors
             $this->alert = "Sadly, the computer wins!";
         }
         
-        $this->playAgain = '<input type="submit" name="playAgain" value="Play Again">';
+        $this->playAgain = '<input type="submit" name="playAgain" value="Play Again" style="background-color:#303D38">';
     }
 
 
     private function chosenButton()
     {
-        
+        switch ($_SESSION['userChoice']) {
+            case 'Cat':
+                $this->cat = '<input type="submit" name="choice" value="Cat" style="background-color:#303D38">';
+                break;
+            case 'Mouse':
+                $this->mouse = '<input type="submit" name="choice" value="Mouse" style="background-color:#303D38">';
+                break;
+            case 'Elephant':
+                $this->elephant = '<input type="submit" name="choice" value="Elephant" style="background-color:#303D38">';
+                break;
+        }
     }
 
 }
