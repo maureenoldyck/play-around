@@ -13,12 +13,12 @@ class GuessingGame
         // We ask for the max guesses when someone creates a game
         // Allowing your settings to be chosen like this, will bring a lot of flexibility
         $this->maxGuesses = $maxGuesses;
-            if (!empty($_SESSION['count'])){
-                $this->count = $_SESSION['count'];
-            }
-            if (!empty($_SESSION['secretNumber'])){
-                $this->secretNumber = $_SESSION['secretNumber'];
-            }
+        if (!empty($_SESSION['count'])){
+            $this->count = $_SESSION['count'];
+        }
+        if (!empty($_SESSION['secretNumber'])){
+            $this->secretNumber = $_SESSION['secretNumber'];
+        }
     }
 
     public function run()
@@ -31,7 +31,6 @@ class GuessingGame
             $this->secretNumber = rand(1,10);
             $_SESSION['secretNumber'] = $this->secretNumber;
         }
-
         if (!empty($_POST['submit'])) {
             if ($_POST['guess'] == $this->secretNumber) {
                 $this->playerWins(); 
