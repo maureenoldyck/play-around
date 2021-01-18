@@ -1,12 +1,18 @@
-<!doctype html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport"
-		  content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>Casino Royale - Rock, Paper, Scissors</title>
-</head>
-<body>
-</body>
-</html>
+<?php
+
+// Require the correct variable type to be used (no auto-converting)
+declare(strict_types = 1);
+
+// Show errors so we get helpful information
+ini_set('display_errors', '1');
+ini_set('display_startup_errors', '1');
+error_reporting(E_ALL);
+
+// Load you classes
+require_once 'classes/RockPaperScissors.php';
+
+// Start the game
+$game = new RockPaperScissors();
+$game->run();
+
+require 'view.php';

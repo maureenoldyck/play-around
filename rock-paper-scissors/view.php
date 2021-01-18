@@ -1,18 +1,26 @@
-<?php
+<!doctype html>
+<html lang="en">
 
-// Require the correct variable type to be used (no auto-converting)
-declare(strict_types = 1);
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Casino Royale - Rock, Paper, Scissors</title>
+</head>
 
-// Show errors so we get helpful information
-ini_set('display_errors', '1');
-ini_set('display_startup_errors', '1');
-error_reporting(E_ALL);
+<body>
+    <div class="container">
+        <h1>Rock, Paper, Scissors</h1>
+        <form method="post">
+            <input type="button" name="choice" value="Rock">
+            <input type="button" name="choice" value="Paper">
+            <input type="button" name="choice" value="Scissors">
+            <input type="submit" name="play" value="Play">
+        </form>
+        <p> User choice: <?= $game->userChoice; ?> </p>
+        <p> <?= $game->alert; ?> </p>
+    </div>
+</body>
 
-// Load you classes
-require_once 'classes/RockPaperScissors.php.php';
-
-// Start the game
-$game = new RockPaperScissors();
-$game->run();
-
-require 'view.php';
+</html>
