@@ -48,9 +48,8 @@ class GuessingGame
     public function playerWins()
     {// show a winner message (mention how many tries were needed)
         $this->count = $this->count + 1;
-        $this->alert = "Yay! You guessed the secret number in {$this->count} guesses, congratulations you deserve a star!";
         session_destroy();
-        return $this->alert;
+        return $this->alert = "Yay! You guessed the secret number in {$this->count} guesses, congratulations you deserve a star!";
     }
 
     public function playerLoses()
