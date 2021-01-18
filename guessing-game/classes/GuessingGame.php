@@ -54,7 +54,7 @@ class GuessingGame
     public function playerLoses()
     {// show a lost message (mention the secret number)
         $_SESSION['count'] = $this->count + 1;
-        if ($this->count == 2) {
+        if ($this->count == ($this->maxGuesses) -1 ) {
             session_destroy();
             return $this->alert = "Sadly you lose, the secret number was {$this->secretNumber}.";
         } else if ($_POST['guess'] > $this->secretNumber){
