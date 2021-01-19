@@ -1,26 +1,22 @@
 <?php
 
-/* 
-TODO: The dealers hand is always visible
-TODO: After the players turn, the dealer can decide to have one more card if the total amount is lower than the player
-TODO: Add a basic casino style theme to the page
-*/
-
+// TODO: show drawn cards user + drawn dealer cards 
 
 class Blackjack
 {
     public $cards = array(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
     public $randomCardName;
     public $alert = "";
-    public $cardDrawn = "";
-    public $sumUser = "";
+    public $cardDrawn =  'Card drawn:';
+    public $sumUser = 'Cards total sum:';
+    public $sumDealer = 'Cards total sum dealer:';
     public $cardsUser = "";
     public $hit = '<input type="submit" value="HIT" name="newCard">';
     public $stop = '<input type="submit" value="STOP" name="stopTurn">';
     public $reset = '<input type="submit" value="NEW GAME" name="newGame">';
 
 
-    public function run()
+    public function __construct()
     {
         if (empty($_SESSION['sum'])) {
             $_SESSION['sum'] = 0;
@@ -36,6 +32,10 @@ class Blackjack
         if (empty($_SESSION['cardsPoolDealer'])) {
             $_SESSION['cardsPoolDealer'] = $this->cards;
         }
+    }
+
+    public function run()
+    {
 
         if (!empty($_POST['newCard'])) {
             $this->newCard();
@@ -61,9 +61,9 @@ class Blackjack
     private function newCard()
     {
         $this->pickCard();
-        $this->cardDrawn = $this->randomCardName;
+        $this->cardDrawn = 'Card drawn: ' . $this->randomCardName;
         $_SESSION['sum'] = $_SESSION['sum'] + $this->randomCardName;
-        $this->sumUser = $_SESSION['sum'];
+        $this->sumUser = 'Cards total sum: '. $_SESSION['sum'];
         if ($_SESSION['sum'] > 21) {
             $this->alert = "That is more than 21, you lose!";
             $this->deleteButtons();
@@ -87,9 +87,15 @@ class Blackjack
         } else if ($_SESSION['sumDealer'] < $_SESSION['sum']) {
             $this->dealerNewCard();
         } else if ($_SESSION['sumDealer'] == 21 || $_SESSION['sumDealer'] == $_SESSION['sum'] || $_SESSION['sumDealer'] > $_SESSION['sum'] && $_SESSION['sumDealer'] < 21) {
+            $this->cardDrawn = "";
+            $this->sumUser = 'Cards total sum: '. $_SESSION['sum'];
+            $this->sumDealer = 'Cards total sum dealer: '. $_SESSION['sumDealer'];
             $this->alert = "Dealer wins! That means you lose... \nYou had {$_SESSION['sum']}. Dealer had {$_SESSION['sumDealer']}.";
             $this->deleteButtons();
         } else {
+            $this->cardDrawn = "";
+            $this->sumUser = 'Cards total sum: '. $_SESSION['sum'];
+            $this->sumDealer = 'Cards total sum dealer: '. $_SESSION['sumDealer'];
             $this->alert = "You win! Great job! \nYou had {$_SESSION['sum']}. Dealer had {$_SESSION['sumDealer']}.";
             $this->deleteButtons();
         }
@@ -100,5 +106,4 @@ class Blackjack
         $this->hit = '';
         $this->stop = '';
     }
-
 }

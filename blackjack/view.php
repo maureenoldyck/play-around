@@ -10,15 +10,24 @@
 <body>
 	<div class="container">
 		<h3> Drawn Cards: </h3>
-		<ul>
-		</ul>
+<table>
+	<tr>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+	</tr>
+</table>
 		<form method="post">
 			<?= $game->hit ?> 
 			<?= $game->stop ?>	
 			<?= $game->reset ?>	
 		</form>
-		<p> Card drawn: <?= $game->cardDrawn ?></p>
-		<p> Cards total: <?= $game->sumUser ?></p>
+		<p> <?= $game->cardDrawn ?></p>
+		<p> <?= $game->sumUser ?></p>
+		<p> <?= $game->sumDealer ?></p>
 		<p> <?= $game->alert ?></p>
 	</div>
 </body>
@@ -30,6 +39,21 @@ li {
 	display: inline;
 	padding: 16px;
 	text-align: center
+}
+
+input {
+  background-color: #849984;
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+.container {
+	margin: 0 auto;
+	width: 70%;
+	text-align: center;
 }
 
 </style>
