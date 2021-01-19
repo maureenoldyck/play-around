@@ -8,6 +8,10 @@
 	<title>Casino royale - Blackjack</title>
 </head>
 <body>
-
+	<form method="post">
+		<input type="submit" value="HIT" name="newCard">
+		<input type="submit" value="STOP" name="stopTurn">
+		<input type="submit" value="NEW GAME" name="newGame">
+	</form>
 </body>
 </html>
