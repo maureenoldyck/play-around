@@ -1,7 +1,6 @@
 <?php
 
 /* 
-TODO: The drawn card is shown on the screen (just a number to represent the card is enough for now, special cards can show as 10)
 TODO: The dealers hand is always visible
 TODO: After the players turn, the dealer can decide to have one more card if the total amount is lower than the player
 TODO: Add a basic casino style theme to the page
@@ -69,7 +68,6 @@ class Blackjack
             $this->alert = "That is more than 21, you lose!";
             $this->deleteButtons();
         } 
-        $this-> cardsUser = $this->showCards($_SESSION['userCards']);
     }
 
     private function dealerNewCard() 
@@ -96,14 +94,6 @@ class Blackjack
             $this->deleteButtons();
         }
     }
-
-    private function showCards($array) 
-    {
-        foreach ($array as &$card) {     
-            echo '<li>' . $card . '</li>'; 
-        }
-    }
-
 
     private function deleteButtons()
     {

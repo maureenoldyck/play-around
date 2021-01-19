@@ -9,8 +9,8 @@
 </head>
 <body>
 	<div class="container">
+		<h3> Drawn Cards: </h3>
 		<ul>
-		<?= $game->cardsUser ?>
 		</ul>
 		<form method="post">
 			<?= $game->hit ?> 
