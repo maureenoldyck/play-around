@@ -1,19 +1,17 @@
 <?php
 
-/* TODO:
-You'll need to create a variable containing possible card options (focus on the numbers, we don't really care about the symbols for now)
-The drawn card is shown on the screen (just a number to represent the card is enough for now, special cards can show as 10)
-If a card is drawn, that one disappears from the pool
-What html element can be best used to display a list of the users cards?
-Win conditions (21) or lose conditions are checked (22+)
-If player has won or lost, the game ends and a message is showing
-If not, the player can request a new card
-The dealers hand is always visible
-The player can stop (with a lower hand than 21), after which the dealer tries to beat him (= have a higher hand)
-After the players turn, the dealer can decide to have one more card if the total amount is lower than the player
-The dealer wins in the event of a draw
-If the player stops, the dealer gets as many turns as needed to either win or go bust
-Add a basic casino style theme to the page
+/* 
+TODO: You'll need to create a variable containing possible card options (focus on the numbers, we don't really care about the symbols for now)
+TODO: The drawn card is shown on the screen (just a number to represent the card is enough for now, special cards can show as 10)
+TODO: What html element can be best used to display a list of the users cards?
+TODO: If player has won or lost, the game ends and a message is showing
+TODO: If not, the player can request a new card
+TODO: The dealers hand is always visible
+TODO: The player can stop (with a lower hand than 21), after which the dealer tries to beat him (= have a higher hand)
+TODO: After the players turn, the dealer can decide to have one more card if the total amount is lower than the player
+TODO: The dealer wins in the event of a draw
+TODO: If the player stops, the dealer gets as many turns as needed to either win or go bust
+TODO: Add a basic casino style theme to the page
 */
 
 
@@ -25,9 +23,12 @@ class Blackjack
 
     public function run()
     {
-
         if (empty($_SESSION['sum'])) {
             $_SESSION['sum'] = 0;
+        }
+
+        if (empty($_SESSION['cardsPool'])) {
+            $_SESSION['cardsPool'] = $this->cards;
         }
 
         if (!empty($_POST['newCard'])) {
@@ -41,9 +42,12 @@ class Blackjack
 
     private function pickCard() 
     {
-        $randomCard = array_rand($this->cards);
-        $this->randomCardName = $this->cards[$randomCard];
-        \array_splice($this->cards, $randomCard, 1);
+        $randomCard = array_rand($_SESSION['cardsPool']);
+        $this->randomCardName = $_SESSION['cardsPool'][$randomCard];
+        \array_splice($_SESSION['cardsPool'], $randomCard, 1);
+        echo '<pre>';
+        var_dump($_SESSION['cardsPool']);
+        echo '</pre>';
     }
 
     private function newCard()
