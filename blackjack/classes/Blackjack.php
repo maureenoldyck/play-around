@@ -44,7 +44,7 @@ class Blackjack
         }
 
         if (!empty($_POST['stopTurn'])) {
-            $this->dealerTurn();
+            $this->dealerNewCard();
         }
 
         if (!empty($_POST['newGame'])) {
@@ -80,12 +80,13 @@ class Blackjack
         array_push($this->dealerCards, $this->randomCardName);
         \array_splice($_SESSION['cardsPoolDealer'], $randomCard, 1);
         $_SESSION['sumDealer'] = $_SESSION['sumDealer'] + $this->randomCardName;
+        $this->dealerTurn();
     }
 
     private function dealerTurn()
     {
         if ($_SESSION['sum'] == 0 ) { 
-            echo 'Please hit some cards before you press stand, except if you want to lose...';
+            echo 'Please get some cards before you press stand, except if you want to lose...';
         } else if ($_SESSION['sumDealer'] < $_SESSION['sum']) {
             $this->dealerNewCard();
         } else if ($_SESSION['sumDealer'] == 21 || $_SESSION['sumDealer'] == $_SESSION['sum'] || $_SESSION['sumDealer'] > $_SESSION['sum'] && $_SESSION['sumDealer'] < 21) {
