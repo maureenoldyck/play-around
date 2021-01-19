@@ -9,8 +9,6 @@
 </head>
 <body>
 	<div class="container">
-		<p> Card drawn: <?= $game->cardDrawn ?></p>
-		<p> Cards total: <?= $game->sumUser ?></p>
 		<ul>
 		<?= $game->cardsUser ?>
 		</ul>
@@ -19,7 +17,20 @@
 			<?= $game->stop ?>	
 			<?= $game->reset ?>	
 		</form>
+		<p> Card drawn: <?= $game->cardDrawn ?></p>
+		<p> Cards total: <?= $game->sumUser ?></p>
 		<p> <?= $game->alert ?></p>
 	</div>
 </body>
+
+<style>
+
+li {
+	list-style-type: none;
+	display: inline;
+	padding: 16px;
+	text-align: center
+}
+
+</style>
 </html>

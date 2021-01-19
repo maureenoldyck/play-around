@@ -12,8 +12,6 @@ class Blackjack
 {
     public $cards = array(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
     public $randomCardName;
-    public $userCards = array();
-    public $dealerCards = array();
     public $alert = "";
     public $cardDrawn = "";
     public $sumUser = "";
@@ -27,10 +25,9 @@ class Blackjack
     {
         if (empty($_SESSION['sum'])) {
             $_SESSION['sum'] = 0;
-        }
-
-        if (empty ($_SESSION['sumDealer'])) {
             $_SESSION['sumDealer'] = 0;
+            $_SESSION['userCards'] = array();
+            $_SESSION['dealerCards'] = array();
         }
 
         if (empty($_SESSION['cardsPool'])) {
@@ -58,7 +55,7 @@ class Blackjack
     {
         $randomCard = array_rand($_SESSION['cardsPool']);
         $this->randomCardName = $_SESSION['cardsPool'][$randomCard];
-        array_push($this->userCards, $this->randomCardName);
+        array_push($_SESSION['userCards'], $this->randomCardName);
         \array_splice($_SESSION['cardsPool'], $randomCard, 1);
     }
 
@@ -70,17 +67,16 @@ class Blackjack
         $this->sumUser = $_SESSION['sum'];
         if ($_SESSION['sum'] > 21) {
             $this->alert = "That is more than 21, you lose!";
-            $this->hit = '';
-            $this->stop = '';
+            $this->deleteButtons();
         } 
-        $this->showCards($this->userCards);
+        $this-> cardsUser = $this->showCards($_SESSION['userCards']);
     }
 
     private function dealerNewCard() 
     {
         $randomCard = array_rand($_SESSION['cardsPoolDealer']);
         $this->randomCardName = $_SESSION['cardsPoolDealer'][$randomCard];
-        array_push($this->dealerCards, $this->randomCardName);
+        array_push($_SESSION['dealerCards'], $this->randomCardName);
         \array_splice($_SESSION['cardsPoolDealer'], $randomCard, 1);
         $_SESSION['sumDealer'] = $_SESSION['sumDealer'] + $this->randomCardName;
         $this->dealerTurn();
@@ -94,21 +90,25 @@ class Blackjack
             $this->dealerNewCard();
         } else if ($_SESSION['sumDealer'] == 21 || $_SESSION['sumDealer'] == $_SESSION['sum'] || $_SESSION['sumDealer'] > $_SESSION['sum'] && $_SESSION['sumDealer'] < 21) {
             $this->alert = "Dealer wins! That means you lose... \nYou had {$_SESSION['sum']}. Dealer had {$_SESSION['sumDealer']}.";
-            $this->hit = '';
-            $this->stop = '';
+            $this->deleteButtons();
         } else {
             $this->alert = "You win! Great job! \nYou had {$_SESSION['sum']}. Dealer had {$_SESSION['sumDealer']}.";
-            $this->hit = '';
-            $this->stop = '';
+            $this->deleteButtons();
         }
     }
 
     private function showCards($array) 
     {
-        foreach ($array as &$card)
-        {
-        echo $card;
+        foreach ($array as &$card) {     
+            echo '<li>' . $card . '</li>'; 
         }
+    }
+
+
+    private function deleteButtons()
+    {
+        $this->hit = '';
+        $this->stop = '';
     }
 
 }
