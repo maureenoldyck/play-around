@@ -8,7 +8,9 @@
 	<title>Casino royale - Blackjack</title>
 </head>
 <body>
+	<div></div>
 	<div class="container">
+		<h1>BLACKJACK</h1>
 		<h2> Drawn Cards: </h2>
 		<table>
 			<tr>
@@ -35,12 +37,17 @@
 			</tr>
 		</table>
 	</div>
+	<div></div>
 </body>
 
 <style>
 
 body {
 	background-color: #B5CCBD;
+}
+
+h1{
+color: white;
 }
 
 h2 {
@@ -60,6 +67,7 @@ input {
   padding: 16px 32px;
   margin: 4px 2px;
   cursor: pointer;
+  border-radius: 5%;
 }
 
 .container {
