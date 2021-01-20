@@ -12,6 +12,12 @@
 <body>
     <div class="container">
         <h1>Cat🐱, Mouse🐭, Elephant🐘</h1>
+        <p class="rounds"> ROUND <?= $_SESSION['round'] ?>  </p>
+        <ul class="pointsSystem">
+            <li> WIN <br> <?= $_SESSION['userScore'] ?> </li>
+            <li> TIES <br> <?= $_SESSION['ties'] ?>  </li>
+            <li>LOST <br> <?= $_SESSION['dealerScore'] ?> </li>
+        </ul>
         <form method="post">
         <?= $game->cat ?>
         <?= $game->mouse ?>
@@ -25,6 +31,7 @@
         <p> <?= $game->alert; ?> </p>
         <form method="post">
         <?= $game->playAgain; ?>
+        <?= $game->reset; ?>
         </form>
     </div>
 </body>
@@ -48,6 +55,23 @@ input {
   margin: 4px 2px;
   cursor: pointer;
 }
+
+.rounds {
+    text-align: center;
+}
+
+.pointsSystem {
+    list-style: none;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    margin-bottom: 50px;
+}
+
+.pointsSystem>li {
+    margin: 0 150px;
+}
+
 
 </style>
 
