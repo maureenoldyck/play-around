@@ -14,6 +14,7 @@
 		<form action="" method="post">
 			Guess: <input type="number" name="guess"><br>
 			<input name="submit" type="submit">
+			<input name="reset" type="submit" value="Reset">
 		</form>
 		<p> <?= $game->alert;?> </p>
 	</div>

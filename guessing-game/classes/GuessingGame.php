@@ -6,6 +6,7 @@ class GuessingGame
     public $secretNumber;
     public $count;
     public $alert;
+    public $guessesLeft;
     
     // set a default amount of max guesses
     public function __construct(int $maxGuesses)
@@ -40,6 +41,12 @@ class GuessingGame
                 $this->playerLoses();
             }
         }
+
+        if (!empty($_POST['reset'])) {
+            $_SESSION['secretNumber'] = "";
+            $_SESSION['count'] = 0;
+        }
+
     }
         // --> if so, check if the player won (run the related function) or not (give a hint if the number was higher/lower or run playerLoses if all guesses are used).
         // TODO as an extra: if a reset button was clicked, use the reset function to set up a new game
@@ -54,13 +61,14 @@ class GuessingGame
     public function playerLoses()
     {// show a lost message (mention the secret number)
         $_SESSION['count'] = $this->count + 1;
+        $this->guessesLeft = ($this->maxGuesses - $this->count) -1 ;
         if ($this->count == ($this->maxGuesses) -1 ) {
             session_destroy();
             return $this->alert = "Sadly you lose, the secret number was {$this->secretNumber}.";
         } else if ($_POST['guess'] > $this->secretNumber){
-            return $this->alert = "Your guess was too high, please try again!!";
+            return $this->alert = "Your guess was too high, please try again!! You have {$this->guessesLeft} guesses left.";
         } else {
-            return $this->alert = "Your guess was too low, please try again!!";
+            return $this->alert = "Your guess was too low, please try again!! You have {$this->guessesLeft} guesses left.";
         }
     }
 
