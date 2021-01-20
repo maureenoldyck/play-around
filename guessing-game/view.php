@@ -13,10 +13,33 @@
 		<p>Guess a random number between 1 and 10!</p>
 		<form action="" method="post">
 			Guess: <input type="number" name="guess"><br>
-			<input name="submit" type="submit">
-			<input name="reset" type="submit" value="Reset">
+			<input name="submit" type="submit" class="button">
+			<input name="reset" type="submit" value="Reset" class="button">
 		</form>
 		<p> <?= $game->alert;?> </p>
 	</div>
 </body>
+
+
+<style>
+
+
+.container {
+	width: 70%;
+	margin: 0 auto;
+	text-align: center;
+}
+
+.button {
+  background-color: #849984;
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  margin: 4px 2px;
+  cursor: pointer;
+  margin: 10px;
+}
+
+</style>
+
 </html>

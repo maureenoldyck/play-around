@@ -43,8 +43,7 @@ class GuessingGame
         }
 
         if (!empty($_POST['reset'])) {
-            $_SESSION['secretNumber'] = "";
-            $_SESSION['count'] = 0;
+           $this->reset();
         }
 
     }
@@ -74,6 +73,9 @@ class GuessingGame
 
     public function reset()
     {// TODO: Generate a new secret number and overwrite the previous one
-       
+        $_SESSION['secretNumber'] = "";
+        $_SESSION['count'] = 0;
+        $this->secretNumber = rand(1,10);
+        $_SESSION['secretNumber'] = $this->secretNumber;
     }
 }
