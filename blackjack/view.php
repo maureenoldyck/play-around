@@ -9,11 +9,11 @@
 </head>
 <body>
 	<div class="container">
-		<h3> Drawn Cards: </h3>
+		<h2> Drawn Cards: </h2>
 		<table>
 			<tr>
 			<?php foreach ($_SESSION['userCards'] as $cardDrawn): ?>
-				<td> <?= $cardDrawn ?> </td> 
+				<td class="drawnCards"> <b> <?= $cardDrawn ?> </b> </td> 
 			<?php endforeach; ?>			
 			</tr>
 		</table>
@@ -26,11 +26,11 @@
 		<p> <?= $game->sumUser ?></p>
 		<p> <?= $game->sumDealer ?></p>
 		<p> <?= $game->alert ?></p>
-		<h3> Dealer Cards: </h3>
+		<h2> Dealer Cards: </h2>
 		<table>
 			<tr>
 			<?php foreach ($_SESSION['dealerCards'] as $cardDrawn): ?>
-				<td> <?= $cardDrawn ?> </td> 
+				<td class="drawnCards"> <b> <?= $cardDrawn ?> </b> </td> 
 			<?php endforeach; ?>			
 			</tr>
 		</table>
@@ -39,11 +39,18 @@
 
 <style>
 
+body {
+	background-color: #B5CCBD;
+}
+
+h2 {
+	color: #849984;
+}
+
 td {
 	list-style-type: none;
 	display: inline;
-	padding: 16px;
-	text-align: center
+	text-align: center;
 }
 
 input {
@@ -59,6 +66,18 @@ input {
 	margin: 0 auto;
 	width: 70%;
 	text-align: center;
+}
+
+.drawnCards {
+	color: white;
+	font-size: 30px;
+	border: 1px solid white;
+	margin: 0 10px;
+	padding: 40px;
+}
+
+table {
+	margin: 80px 0;
 }
 
 </style>
