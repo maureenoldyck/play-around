@@ -1,7 +1,5 @@
 <?php
 
-// TODO: show drawn cards user + drawn dealer cards 
-
 class Blackjack
 {
     public $cards = array(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
@@ -10,7 +8,6 @@ class Blackjack
     public $cardDrawn =  'Card drawn:';
     public $sumUser = 'Cards total sum:';
     public $sumDealer = 'Cards total sum dealer:';
-    public $cardsUser = "";
     public $hit = '<input type="submit" value="HIT" name="newCard">';
     public $stop = '<input type="submit" value="STOP" name="stopTurn">';
     public $reset = '<input type="submit" value="NEW GAME" name="newGame">';
@@ -32,11 +29,10 @@ class Blackjack
         if (empty($_SESSION['cardsPoolDealer'])) {
             $_SESSION['cardsPoolDealer'] = $this->cards;
         }
-    }
+    } 
 
     public function run()
     {
-
         if (!empty($_POST['newCard'])) {
             $this->newCard();
         }
@@ -46,7 +42,12 @@ class Blackjack
         }
 
         if (!empty($_POST['newGame'])) {
-            session_destroy();
+            $_SESSION['sum'] = 0;
+            $_SESSION['sumDealer'] = 0;
+            $_SESSION['userCards'] = array();
+            $_SESSION['dealerCards'] = array();
+            $_SESSION['cardsPool'] = $this->cards;
+            $_SESSION['cardsPoolDealer'] = $this->cards;
         }
     }
 
@@ -106,4 +107,5 @@ class Blackjack
         $this->hit = '';
         $this->stop = '';
     }
+
 }

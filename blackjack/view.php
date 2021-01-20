@@ -10,16 +10,13 @@
 <body>
 	<div class="container">
 		<h3> Drawn Cards: </h3>
-<table>
-	<tr>
-		<td></td>
-		<td></td>
-		<td></td>
-		<td></td>
-		<td></td>
-		<td></td>
-	</tr>
-</table>
+		<table>
+			<tr>
+			<?php foreach ($_SESSION['userCards'] as $cardDrawn): ?>
+				<td> <?= $cardDrawn ?> </td> 
+			<?php endforeach; ?>			
+			</tr>
+		</table>
 		<form method="post">
 			<?= $game->hit ?> 
 			<?= $game->stop ?>	
@@ -29,12 +26,20 @@
 		<p> <?= $game->sumUser ?></p>
 		<p> <?= $game->sumDealer ?></p>
 		<p> <?= $game->alert ?></p>
+		<h3> Dealer Cards: </h3>
+		<table>
+			<tr>
+			<?php foreach ($_SESSION['dealerCards'] as $cardDrawn): ?>
+				<td> <?= $cardDrawn ?> </td> 
+			<?php endforeach; ?>			
+			</tr>
+		</table>
 	</div>
 </body>
 
 <style>
 
-li {
+td {
 	list-style-type: none;
 	display: inline;
 	padding: 16px;
