@@ -44,7 +44,7 @@ body {
 }
 
 h2 {
-	color: #849984;
+	color: #CF9490;
 }
 
 td {
