@@ -11,6 +11,11 @@
 	<div></div>
 	<div class="container">
 		<h1>BLACKJACK</h1>
+		<p class="rounds"> ROUND <?= $_SESSION['round'] ?>  </p>
+        <ul class="pointsSystem">
+            <li> WIN <br> <?= $_SESSION['userScore'] ?> </li>
+            <li>LOST <br> <?= $_SESSION['dealerScore'] ?> </li>
+        </ul>
 		<h2> Drawn Cards: </h2>
 		<table>
 			<tr>
@@ -23,6 +28,7 @@
 			<?= $game->hit ?> 
 			<?= $game->stop ?>	
 			<?= $game->reset ?>	
+			<?= $game->resetScore ?>	
 		</form>
 		<p> <?= $game->cardDrawn ?></p>
 		<p> <?= $game->sumUser ?></p>
@@ -87,6 +93,23 @@ input {
 table {
 	margin: 80px 0;
 }
+
+.rounds {
+    text-align: center;
+}
+
+.pointsSystem {
+    list-style: none;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    margin-bottom: 50px;
+}
+
+.pointsSystem>li {
+    margin: 0 150px;
+}
+
 
 </style>
 </html>

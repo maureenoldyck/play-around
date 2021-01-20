@@ -5,6 +5,7 @@ class Blackjack
     public $cards = array(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
     public $randomCardName;
     public $alert = "";
+    public $resetScore = "";
     public $cardDrawn =  'Card drawn:';
     public $sumUser = 'Cards total sum:';
     public $sumDealer = 'Cards total sum dealer:';
@@ -20,6 +21,12 @@ class Blackjack
             $_SESSION['sumDealer'] = 0;
             $_SESSION['userCards'] = array();
             $_SESSION['dealerCards'] = array();
+        }
+
+        if (empty($_SESSION['round'])) {
+            $_SESSION['userScore'] = 0;
+            $_SESSION['dealerScore'] = 0;
+            $_SESSION['round'] = 0;
         }
 
         if (empty($_SESSION['cardsPool'])) {
@@ -39,6 +46,7 @@ class Blackjack
 
         if (!empty($_POST['stopTurn'])) {
             $this->dealerNewCard();
+            $_SESSION['round']++;
         }
 
         if (!empty($_POST['newGame'])) {
@@ -48,6 +56,18 @@ class Blackjack
             $_SESSION['dealerCards'] = array();
             $_SESSION['cardsPool'] = $this->cards;
             $_SESSION['cardsPoolDealer'] = $this->cards;
+        }
+
+        if (!empty($_POST['resetScore'])) {
+            $_SESSION['sum'] = 0;
+            $_SESSION['sumDealer'] = 0;
+            $_SESSION['userCards'] = array();
+            $_SESSION['dealerCards'] = array();
+            $_SESSION['cardsPool'] = $this->cards;
+            $_SESSION['cardsPoolDealer'] = $this->cards;
+            $_SESSION['userScore'] = 0;
+            $_SESSION['dealerScore'] = 0;
+            $_SESSION['round'] = 0;
         }
     }
 
@@ -67,7 +87,7 @@ class Blackjack
         $this->sumUser = 'Cards total sum: '. $_SESSION['sum'];
         if ($_SESSION['sum'] > 21) {
             $this->alert = "That is more than 21, you lose!";
-            $this->deleteButtons();
+            $this->deleteButtonsAndAddReset();
         } 
     }
 
@@ -88,24 +108,27 @@ class Blackjack
         } else if ($_SESSION['sumDealer'] < $_SESSION['sum']) {
             $this->dealerNewCard();
         } else if ($_SESSION['sumDealer'] == 21 || $_SESSION['sumDealer'] == $_SESSION['sum'] || $_SESSION['sumDealer'] > $_SESSION['sum'] && $_SESSION['sumDealer'] < 21) {
+            $_SESSION['dealerScore']++;
             $this->cardDrawn = "";
             $this->sumUser = 'Cards total sum: '. $_SESSION['sum'];
             $this->sumDealer = 'Cards total sum dealer: '. $_SESSION['sumDealer'];
             $this->alert = "Dealer wins! That means you lose... \nYou had {$_SESSION['sum']}. Dealer had {$_SESSION['sumDealer']}.";
-            $this->deleteButtons();
+            $this->deleteButtonsAndAddReset();
         } else {
+            $_SESSION['userScore']++;
             $this->cardDrawn = "";
             $this->sumUser = 'Cards total sum: '. $_SESSION['sum'];
             $this->sumDealer = 'Cards total sum dealer: '. $_SESSION['sumDealer'];
             $this->alert = "You win! Great job! \nYou had {$_SESSION['sum']}. Dealer had {$_SESSION['sumDealer']}.";
-            $this->deleteButtons();
+            $this->deleteButtonsAndAddReset();
         }
     }
 
-    private function deleteButtons()
+    private function deleteButtonsAndAddReset()
     {
         $this->hit = '';
         $this->stop = '';
+        $this->resetScore = '<input type="submit" value="RESET" name="resetScore">';
     }
 
 }
