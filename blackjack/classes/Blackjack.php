@@ -22,7 +22,7 @@ class Blackjack
             $_SESSION['dealerCards'] = array();
             $_SESSION['cardsPool'] = $this->cards;
             $_SESSION['cardsPoolDealer'] = $this->cards;
-            $this->startCarts();
+            $this->startCards();
         }
 
         if (empty($_SESSION['round'])) {
@@ -50,7 +50,7 @@ class Blackjack
             $_SESSION['dealerCards'] = array();
             $_SESSION['cardsPool'] = $this->cards;
             $_SESSION['cardsPoolDealer'] = $this->cards;
-            $this->startCarts();
+            $this->startCards();
         }
 
         if (!empty($_POST['resetScore'])) {
@@ -63,6 +63,7 @@ class Blackjack
             $_SESSION['userScore'] = 0;
             $_SESSION['dealerScore'] = 0;
             $_SESSION['round'] = 0;
+            $this->startCards();
         }
     }
 
@@ -90,11 +91,7 @@ class Blackjack
 
     private function dealerNewCard() 
     {
-        $randomCard = array_rand($_SESSION['cardsPoolDealer']);
-        $this->randomCardName = $_SESSION['cardsPoolDealer'][$randomCard];
-        array_push($_SESSION['dealerCards'], $this->randomCardName);
-        \array_splice($_SESSION['cardsPoolDealer'], $randomCard, 1);
-        $_SESSION['sumDealer'] = $_SESSION['sumDealer'] + $this->randomCardName;
+        $this->dealerCards();
         $this->dealerTurn();
     }
 
@@ -126,22 +123,26 @@ class Blackjack
         $this->resetScore = '<input type="submit" value="RESET" name="resetScore">';
     }
 
-    private function startCarts()
+    private function startCards()
     {
         $this->newCard();
         $this->newCard();
-        $this->dealerStartCarts();
-        $this->dealerStartCarts();
+        $this->dealerCards();
+        $this->dealerCards();
     }
 
-    private function dealerStartCarts()
+    private function dealerCards()
     {
         $randomCard = array_rand($_SESSION['cardsPoolDealer']);
         $this->randomCardName = $_SESSION['cardsPoolDealer'][$randomCard];
         array_push($_SESSION['dealerCards'], $this->randomCardName);
         \array_splice($_SESSION['cardsPoolDealer'], $randomCard, 1);
         $_SESSION['sumDealer'] = $_SESSION['sumDealer'] + $this->randomCardName;
-        $this->sumDealer = 'Cards total sum dealer: '. $_SESSION['sumDealer'];
+    }
+
+    private function showSums()
+    {
+        
     }
 
 }
