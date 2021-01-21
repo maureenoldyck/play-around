@@ -86,6 +86,8 @@ class Blackjack
         $_SESSION['sum'] = $_SESSION['sum'] + $this->randomCardName;
         $this->sumUser = 'Cards total sum: '. $_SESSION['sum'];
         if ($_SESSION['sum'] > 21) {
+            $_SESSION['round']++;
+            $_SESSION['dealerScore']++;
             $this->alert = "That is more than 21, you lose!";
             $this->deleteButtonsAndAddReset();
         } 
