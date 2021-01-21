@@ -30,7 +30,6 @@
 			<?= $game->reset ?>	
 			<?= $game->resetScore ?>	
 		</form>
-		<p> <?= $game->cardDrawn ?></p>
 		<p> <?= $game->sumUser ?></p>
 		<p> <?= $game->sumDealer ?></p>
 		<p> <?= $game->alert ?></p>
