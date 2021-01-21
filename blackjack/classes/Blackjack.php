@@ -30,6 +30,9 @@ class Blackjack
             $_SESSION['dealerScore'] = 0;
             $_SESSION['round'] = 0;
         }
+
+        $this->showSums();
+
     } 
 
     public function run()
@@ -79,8 +82,7 @@ class Blackjack
     {
         $this->pickCard();
         $_SESSION['sum'] = $_SESSION['sum'] + $this->randomCardName;
-        $this->sumUser = 'Cards total sum: '. $_SESSION['sum'];
-        $this->sumDealer = 'Cards total sum dealer: '. $_SESSION['sumDealer'];
+        $this->showSums();
         if ($_SESSION['sum'] > 21) {
             $_SESSION['round']++;
             $_SESSION['dealerScore']++;
@@ -103,14 +105,12 @@ class Blackjack
             $this->dealerNewCard();
         } else if ($_SESSION['sumDealer'] == 21 || $_SESSION['sumDealer'] == $_SESSION['sum'] || $_SESSION['sumDealer'] > $_SESSION['sum'] && $_SESSION['sumDealer'] < 21) {
             $_SESSION['dealerScore']++;
-            $this->sumUser = 'Cards total sum: '. $_SESSION['sum'];
-            $this->sumDealer = 'Cards total sum dealer: '. $_SESSION['sumDealer'];
+            $this->showSums();
             $this->alert = "Dealer wins! That means you lose... \nYou had {$_SESSION['sum']}. Dealer had {$_SESSION['sumDealer']}.";
             $this->deleteButtonsAndAddReset();
         } else {
             $_SESSION['userScore']++;
-            $this->sumUser = 'Cards total sum: '. $_SESSION['sum'];
-            $this->sumDealer = 'Cards total sum dealer: '. $_SESSION['sumDealer'];
+            $this->showSums();
             $this->alert = "You win! Great job! \nYou had {$_SESSION['sum']}. Dealer had {$_SESSION['sumDealer']}.";
             $this->deleteButtonsAndAddReset();
         }
@@ -142,7 +142,8 @@ class Blackjack
 
     private function showSums()
     {
-        
+        $this->sumUser = 'Cards total sum: '. $_SESSION['sum'];
+        $this->sumDealer = 'Cards total sum dealer: '. $_SESSION['sumDealer'];
     }
 
 }
